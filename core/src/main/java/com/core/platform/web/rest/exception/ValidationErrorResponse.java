@@ -1,0 +1,21 @@
+package com.core.platform.web.rest.exception;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
+
+@XmlRootElement(name = "validation_error")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ValidationErrorResponse {
+    @XmlElementWrapper(name = "field_errors")
+    @XmlElement(name = "field_error")
+    private final List<FieldError> fieldErrors = new ArrayList<>();
+
+    public List<FieldError> getFieldErrors() {
+        return fieldErrors;
+    }
+}

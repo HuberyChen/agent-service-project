@@ -1,11 +1,16 @@
 package com.core.platform;
 
+import com.core.platform.web.site.SiteSettings;
 import com.core.platform.web.site.cdn.CDNSettings;
 import com.core.platform.web.site.cdn.DefaultCDNSettings;
+import com.core.platform.web.site.exception.ErrorPageModelBuilder;
+import com.core.platform.web.site.layout.ModelContext;
+import com.core.platform.web.site.session.SecureSessionContext;
 import com.core.platform.web.site.session.SessionContext;
 import com.core.platform.web.site.view.DefaultFreemarkerView;
 import com.core.platform.web.site.view.DefaultFreemarkerViewResolver;
 import com.core.utils.CharacterEncodings;
+import com.core.web.ExceptionInterceptor;
 import freemarker.template.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
@@ -16,9 +21,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import javax.inject.Singleton;
 import java.util.Properties;
 
-/**
- * @author neo
- */
 @Singleton
 public class DefaultSiteWebConfig extends AbstractWebConfig {
     @Bean
@@ -50,6 +52,33 @@ public class DefaultSiteWebConfig extends AbstractWebConfig {
         resolver.setExposeRequestAttributes(true);
         resolver.setAllowRequestOverride(true);
         return resolver;
+    }
+
+    @Bean
+    public ExceptionInterceptor exceptionInterceptor() {
+        return new ExceptionInterceptor();
+    }
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    SecureSessionContext secureSessionContext() {
+        return new SecureSessionContext();
+    }
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    ModelContext modelContextContext() {
+        return new ModelContext();
+    }
+
+    @Bean
+    public SiteSettings siteSettings() {
+        return new SiteSettings();
+    }
+
+    @Bean
+    ErrorPageModelBuilder errorPageModelBuilder() {
+        return new ErrorPageModelBuilder();
     }
 
     @Bean

@@ -5,6 +5,7 @@ import com.core.platform.monitor.web.MonitorControllerConfig;
 import com.core.platform.web.DeploymentSettings;
 import com.core.platform.web.request.RequestContextImpl;
 import com.core.platform.web.request.RequestContextInterceptor;
+import com.core.platform.web.rest.exception.ErrorResponseBuilder;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -42,6 +43,11 @@ public class AbstractWebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public DeploymentSettings deploymentSettings() {
         return DeploymentSettings.get();
+    }
+
+    @Bean
+    ErrorResponseBuilder errorResponseBuilder() {
+        return new ErrorResponseBuilder();
     }
 
     @Bean

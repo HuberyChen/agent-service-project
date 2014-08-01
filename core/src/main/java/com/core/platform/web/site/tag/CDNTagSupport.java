@@ -68,7 +68,6 @@ public class CDNTagSupport extends TagSupport {
         return builder.buildRelativeURL();
     }
 
-    // TODO(neo): tuning by not using String.format, according to profiling result
     String buildMultipleResourceTags(String srcKey, String resourceDir, String tagTemplate, Map<String, Object> params) throws IOException, TemplateModelException {
         StringBuilder builder = new StringBuilder();
 
