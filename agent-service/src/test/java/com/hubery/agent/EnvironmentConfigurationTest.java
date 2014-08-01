@@ -1,7 +1,6 @@
 package com.hubery.agent;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -23,59 +22,8 @@ import java.util.Properties;
  */
 public class EnvironmentConfigurationTest {
     private static final List<String> IGNORED_DIRS = Arrays.asList(".svn");
-    private static final String ENV_ROOT_DIR = "conf";
-    private static final String RESOURCE_DIR = "resources";
     private static final String MAIN_RESOURCE_DIR = "src/main/resources";
     private static final String TEST_RESOURCE_DIR = "src/test/resources";
-
-    private List<String> envResourceDirs;
-
-    @Before
-    public void initializeEnvironmentsResourceDirectories() {
-        File envRootDir = new File(ENV_ROOT_DIR);
-        Assert.assertTrue("env root directory does not exists, please check specified dir: " + envRootDir.getAbsolutePath(), envRootDir.exists());
-        Assert.assertTrue("env root directory is not directory, please check: " + envRootDir.getAbsolutePath(), envRootDir.isDirectory());
-
-        File[] envDirs = envRootDir.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory() && !IGNORED_DIRS.contains(file.getName());
-            }
-        });
-        envResourceDirs = new ArrayList<String>();
-        for (File dir : envDirs) {
-            envResourceDirs.add(String.format("%s/%s/%s", ENV_ROOT_DIR, dir.getName(), RESOURCE_DIR));
-        }
-    }
-
-    // all Files under /conf/{env} must have corresponding files under src/main/java/resources
-    @Test
-    public void validateEnvConfigFilesOverrideDefault() {
-        boolean foundError = false;
-        StringBuilder errorMessage = new StringBuilder("unnecessary resources found:\n");
-        for (String envResourceDir : envResourceDirs) {
-            EnvironmentResourcesValidator validator = new EnvironmentResourcesValidator(envResourceDir);
-            if (validator.hasUnnecessaryResources()) {
-                foundError = true;
-                List<String> unnecessaryResources = validator.getUnnecessaryResources();
-                errorMessage.append(createUnnecessaryResourcesErrorMessage(unnecessaryResources, envResourceDir));
-            }
-        }
-
-        Assert.assertFalse(errorMessage.toString(), foundError);
-    }
-
-    @Test
-    public void validateEnvPropertyFilesOverrideDefault() throws Exception {
-        List<String> inconsistentPropertyFiles = new ArrayList<String>();
-        for (String environmentDirectoryPath : envResourceDirs) {
-            EnvPropertiesValidator envPropertiesValidator = new EnvPropertiesValidator(environmentDirectoryPath);
-            List<String> envInconsistentPropertyFiles = envPropertiesValidator.compareToMainProperties();
-            inconsistentPropertyFiles.addAll(envInconsistentPropertyFiles);
-        }
-
-        Assert.assertTrue(buildInconsistentPropertiesErrorMessage(inconsistentPropertyFiles), inconsistentPropertyFiles.isEmpty());
-    }
 
     @Test
     public void validateTestPropertyFilesOverridesDefault() throws Exception {
@@ -86,16 +34,6 @@ public class EnvironmentConfigurationTest {
         Assert.assertTrue(buildInconsistentPropertiesErrorMessage(inconsistentPropertyFiles), inconsistentPropertyFiles.isEmpty());
     }
 
-    private String createUnnecessaryResourcesErrorMessage(List<String> environmentResources, String env) {
-        StringBuilder builder = new StringBuilder();
-        for (String resource : environmentResources) {
-            builder.append("\t");
-            builder.append(env).append("/" + RESOURCE_DIR + "/").append(resource);
-            builder.append("\n");
-        }
-        return builder.toString();
-    }
-
     private String buildInconsistentPropertiesErrorMessage(List<String> inconsistentPropertyFiles) {
         StringBuilder builder = new StringBuilder("inconsistent property files found:\n");
         for (String resource : inconsistentPropertyFiles) {
@@ -104,30 +42,6 @@ public class EnvironmentConfigurationTest {
             builder.append("\n");
         }
         return builder.toString();
-    }
-
-    static class EnvironmentResourcesValidator {
-        private List<String> environmentResources;
-        private List<String> mainResources;
-
-        public EnvironmentResourcesValidator(String environmentResourcesDirectory) {
-            environmentResources = new ResourceFolderScanner(environmentResourcesDirectory).getFiles();
-            mainResources = new ResourceFolderScanner(MAIN_RESOURCE_DIR).getFiles();
-        }
-
-        public boolean hasUnnecessaryResources() {
-            return !getUnnecessaryResources(mainResources, environmentResources).isEmpty();
-        }
-
-        public List<String> getUnnecessaryResources() {
-            return getUnnecessaryResources(mainResources, environmentResources);
-        }
-
-        private List<String> getUnnecessaryResources(List<String> mainResources, List<String> environmentResources) {
-            List<String> tempEnvironmentResources = new ArrayList<String>(environmentResources);
-            tempEnvironmentResources.removeAll(mainResources);
-            return tempEnvironmentResources;
-        }
     }
 
     static class EnvPropertiesValidator {
@@ -182,12 +96,6 @@ public class EnvironmentConfigurationTest {
 
         public ResourceFolderScanner(String path) {
             this.path = path;
-        }
-
-        public List<String> getFiles() {
-            List<String> results = new ArrayList<String>();
-            getFilesRecursively(path, results, null);
-            return removePathPrefix(results);
         }
 
         public List<String> getPropertyFiles() {

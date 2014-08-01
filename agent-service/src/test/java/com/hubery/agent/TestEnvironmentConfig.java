@@ -1,8 +1,6 @@
 package com.hubery.agent;
 
-import com.quidsi.core.platform.DefaultAppConfig;
-import com.quidsi.core.platform.scheduler.Scheduler;
-
+import com.core.platform.DefaultAppConfig;
 import org.hibernate.dialect.HSQLDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +18,7 @@ import javax.sql.DataSource;
 @Profile("test")
 @Configuration
 public class TestEnvironmentConfig extends DefaultAppConfig {
-   
+
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
@@ -48,8 +46,4 @@ public class TestEnvironmentConfig extends DefaultAppConfig {
                 .build();
     }
 
-    @Bean
-    public Scheduler scheduler() {
-        return new MockScheduler();
-    }
 }

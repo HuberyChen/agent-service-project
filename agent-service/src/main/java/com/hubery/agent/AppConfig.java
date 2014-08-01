@@ -1,17 +1,14 @@
 package com.hubery.agent;
 
 
-
-import com.quidsi.core.crypto.EncryptionUtils;
-import com.quidsi.core.database.ConnectionPoolDataSource;
-import com.quidsi.core.database.JPAAccess;
-import com.quidsi.core.log.LogSettings;
-import com.quidsi.core.platform.DefaultAppConfig;
-import com.quidsi.core.platform.PlatformScopeResolver;
-import com.quidsi.core.platform.concurrent.TaskExecutor;
-import com.quidsi.core.util.ClasspathResource;
-import com.hubery.agent.service.agent-service-projectServiceLogMessageFilter;
-
+import com.core.crypto.EncryptionUtils;
+import com.core.database.ConnectionPoolDataSource;
+import com.core.database.JPAAccess;
+import com.core.log.LogSettings;
+import com.core.platform.DefaultAppConfig;
+import com.core.platform.PlatformScopeResolver;
+import com.core.utils.ClasspathResource;
+import com.hubery.agent.service.AgentServiceLogMessageFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +18,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -33,15 +31,10 @@ public class AppConfig extends DefaultAppConfig {
     @Inject
     Environment env;
 
-    @Bean
-    public TaskExecutor taskExecutor() {
-        return TaskExecutor.fixedSizeExecutor(25);
-    }
-
     @Override
     public LogSettings logSettings() {
         LogSettings settings = LogSettings.get();
-        settings.setLogMessageFilter(new agent-service-projectServiceLogMessageFilter());
+        settings.setLogMessageFilter(new AgentServiceLogMessageFilter());
         return settings;
     }
 

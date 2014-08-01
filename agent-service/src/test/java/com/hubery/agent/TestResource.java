@@ -1,7 +1,8 @@
 package com.hubery.agent;
 
-import com.quidsi.core.util.AssertUtils;
-import com.quidsi.core.util.IOUtils;
+
+import com.core.utils.AssertUtils;
+import com.core.utils.IOUtils;
 
 import java.io.InputStream;
 
