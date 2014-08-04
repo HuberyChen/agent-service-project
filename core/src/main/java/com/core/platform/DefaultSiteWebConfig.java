@@ -3,10 +3,14 @@ package com.core.platform;
 import com.core.platform.web.site.SiteSettings;
 import com.core.platform.web.site.cdn.CDNSettings;
 import com.core.platform.web.site.cdn.DefaultCDNSettings;
+import com.core.platform.web.site.cookie.CookieContext;
+import com.core.platform.web.site.cookie.CookieInterceptor;
 import com.core.platform.web.site.exception.ErrorPageModelBuilder;
 import com.core.platform.web.site.layout.ModelContext;
+import com.core.platform.web.site.scheme.HTTPSchemeEnforceInterceptor;
 import com.core.platform.web.site.session.SecureSessionContext;
 import com.core.platform.web.site.session.SessionContext;
+import com.core.platform.web.site.session.SessionInterceptor;
 import com.core.platform.web.site.view.DefaultFreemarkerView;
 import com.core.platform.web.site.view.DefaultFreemarkerViewResolver;
 import com.core.utils.CharacterEncodings;
@@ -82,9 +86,30 @@ public class DefaultSiteWebConfig extends AbstractWebConfig {
     }
 
     @Bean
+    public CookieInterceptor cookieInterceptor() {
+        return new CookieInterceptor();
+    }
+
+    @Bean
+    public SessionInterceptor sessionInterceptor() {
+        return new SessionInterceptor();
+    }
+
+    @Bean
     @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
     SessionContext sessionContext() {
         return new SessionContext();
+    }
+
+    @Bean
+    public HTTPSchemeEnforceInterceptor httpSchemeEnforceInterceptor() {
+        return new HTTPSchemeEnforceInterceptor();
+    }
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    CookieContext cookieContext() {
+        return new CookieContext();
     }
 
 }

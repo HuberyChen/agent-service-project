@@ -58,8 +58,7 @@ public class AppConfig extends DefaultAppConfig {
         factoryBean.setPackagesToScan(AppConfig.class.getPackage().getName());
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabasePlatform(env.getRequiredProperty("jdbc.sqlDialect"));
-        vendorAdapter.setShowSql(false);
-        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setShowSql(true);
         factoryBean.setJpaVendorAdapter(vendorAdapter);
         return factoryBean;
     }

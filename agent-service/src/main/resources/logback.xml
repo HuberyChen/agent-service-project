@@ -4,24 +4,24 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
-        <encoder class="com.quidsi.core.log.FilterMessagePatternLayoutEncoder">
+        <encoder class="com.core.log.FilterMessagePatternLayoutEncoder">
             <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="trace" class="com.quidsi.core.log.TraceAppender">
-        <layout class="com.quidsi.core.log.FilterMessagePatternLayout">
+    <appender name="trace" class="com.core.log.TraceAppender">
+        <layout class="com.core.log.FilterMessagePatternLayout">
             <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
         </layout>
     </appender>
 
     <appender name="action" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="com.quidsi.core.log.FilterMessagePatternLayoutEncoder">
+        <encoder class="com.core.log.FilterMessagePatternLayoutEncoder">
             <pattern>%message%n</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.quidsi.core.log.ActionLogger" additivity="false" level="INFO">
+    <logger name="com.core.log.ActionLogger" additivity="false" level="INFO">
         <appender-ref ref="action"/>
     </logger>
 

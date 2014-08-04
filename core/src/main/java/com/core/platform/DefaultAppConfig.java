@@ -90,5 +90,10 @@ public class DefaultAppConfig {
     ServerStatus serverStatus() {
         return new ServerStatus();
     }
+
+    @Bean
+    SpringObjectFactory springObjectFactory() {
+        return new SpringObjectFactory();
+    }
 }
 

@@ -2,7 +2,6 @@ package com.lx.agent.web;
 
 import com.core.platform.web.site.SiteController;
 import com.core.platform.web.site.cookie.RequireCookie;
-import com.core.platform.web.site.scheme.HTTPSOnly;
 import com.core.platform.web.site.session.RequireSession;
 import com.lx.agent.domain.User;
 import com.lx.agent.exception.PermissionForbiddenException;
@@ -19,14 +18,14 @@ import java.util.Map;
 /**
  * @author hubery.chen
  */
-@HTTPSOnly
+//@HTTPSOnly
 @RequireCookie
 @RequireSession
 public class AgentSiteController extends SiteController {
 
     private SiteContext siteContext;
 
-    private final Logger logger = LoggerFactory.getLogger(SiteController.class);
+    private final Logger logger = LoggerFactory.getLogger(AgentSiteController.class);
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)

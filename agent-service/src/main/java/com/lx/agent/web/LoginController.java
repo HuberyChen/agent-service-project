@@ -1,5 +1,7 @@
 package com.lx.agent.web;
 
+import com.core.platform.web.site.cookie.RequireCookie;
+import com.core.platform.web.site.session.RequireSession;
 import com.lx.agent.api.LoginAPIService;
 import com.lx.agent.domain.User;
 import com.lx.agent.service.UserService;
@@ -13,14 +15,17 @@ import java.util.Map;
 /**
  * @author hubery.chen
  */
+//@HTTPSOnly
 @Controller
+@RequireCookie
+@RequireSession
 public class LoginController extends AgentSiteController implements LoginAPIService {
 
     private UserService userService;
 
     @Override
     public String login(Map<String, Object> model) {
-        return "login";
+        return "/login";
     }
 
     @Override
@@ -31,7 +36,7 @@ public class LoginController extends AgentSiteController implements LoginAPIServ
             model.put("msgType", "error");
             return "login";
         }
-        login(user);
+//        login(user);
         model.put("msgType", "success");
         return "home";
     }
