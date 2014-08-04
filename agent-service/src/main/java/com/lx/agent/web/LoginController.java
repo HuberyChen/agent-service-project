@@ -25,7 +25,7 @@ public class LoginController extends AgentSiteController implements LoginAPIServ
 
     @Override
     public String login(Map<String, Object> model) {
-        return "/login";
+        return "login/login";
     }
 
     @Override
@@ -36,8 +36,7 @@ public class LoginController extends AgentSiteController implements LoginAPIServ
             model.put("msgType", "error");
             return "login";
         }
-//        login(user);
-        model.put("msgType", "success");
+        login(user);
         return "home";
     }
 

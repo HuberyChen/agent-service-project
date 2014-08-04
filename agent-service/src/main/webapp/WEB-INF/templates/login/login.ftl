@@ -83,10 +83,10 @@
 
         <div class="large-4 large-centered column">
             <form id="loginForm" action="<@url value='/login'/>" class="form-signin" method="post">
-                <div id="infoNor" class="font16 textCenter pt10 pb10 displayNone">
+                <div style="display: none" id="infoNor" class="font16 textCenter pt10 pb10 displayNone">
                     Please Enter Your Email Address and Password.
                 </div>
-                <div id="infoErr" class="font16 textCenter pt10 pb10 errorColor displayNone">
+                <div style="display: none" id="infoErr" class="font16 textCenter pt10 pb10 errorColor displayNone">
                     Invalid Username or Password. Please Try Again.
                 </div>
             <#if msgType??>

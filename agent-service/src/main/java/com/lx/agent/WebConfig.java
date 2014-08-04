@@ -13,8 +13,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
@@ -93,5 +95,14 @@ public class WebConfig extends DefaultSiteWebConfig {
         registry.addInterceptor(sessionInterceptor());
         registry.addInterceptor(loginRequiredInterceptor());
         registry.addInterceptor(modelBuilderInterceptor());
+
+        OpenEntityManagerInViewInterceptor openEntityManagerInViewInterceptor = new OpenEntityManagerInViewInterceptor();
+        openEntityManagerInViewInterceptor.setEntityManagerFactory(entityManagerFactory);
+        registry.addWebRequestInterceptor(openEntityManagerInViewInterceptor);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("forward:/login");
     }
 }
