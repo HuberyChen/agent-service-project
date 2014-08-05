@@ -1,6 +1,6 @@
 <head>
     <title>Agent</title>
-    <meta charset="utf-8"/>
+    <link rel="shortcut icon" href="<@url value='/dstatic/images/favicon.ico'/>" type="image/vnd.microsoft.icon"/>
 <@css href="public.css,foundation.min.css" rel="stylesheet" type="text/css"/>
 <@js src="jquery.min.js,jquery.form.js,common.js,jquery.validate.js"/>
     <script type="text/javascript">
@@ -42,6 +42,16 @@
     </script>
 </head>
 <body>
+
+<nav class="top-bar">
+    <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+            <h1><span style="color:White;">Agent</span></h1>
+        </li>
+    </ul>
+</nav>
+
 <div class="main">
     <div class="container">
         <form id="registerForm" class="custom" action="<@url value='/register'/>" method="post">

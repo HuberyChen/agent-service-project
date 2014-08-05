@@ -1,15 +1,8 @@
 <head>
     <title>Agent Portal</title>
     <link rel="shortcut icon" href="<@url value='/dstatic/images/favicon.ico'/>" type="image/vnd.microsoft.icon"/>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <@js src="html5.js"/>
-    <![endif]-->
-    <!--[if lt IE 9]>
-    <@js src="json2.js"/>
-    <![endif]-->
-<@css href="foundation.min.css" rel="stylesheet" type="text/css"/>
-<@js src="jquery.min.js,common.js,jquery.validate.js,jquery.form.js"/>
+<@css href="public.css,foundation.min.css" rel="stylesheet" type="text/css"/>
+<@js src="jquery.min.js,jquery.form.js,common.js,jquery.validate.js"/>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#loginForm").validate({
@@ -75,8 +68,11 @@
                 </div>
                 <input type="text" name="emailAddress" id="emailAddress" class="input-block-level required email" placeholder="Email Address" autofocus>
                 <input type="password" name="password" id="password" class="input-block-level required" placeholder="Password">
-                <button id="sign" class="btn btn-large btn-primary btn-block" onclick="login()">Sign in</button>
-                <a id="register" href="<@url value='/register'/>">Register</a>
+
+                <p>
+                    <input style="margin-left: 180px;margin-top: -5px;" type="button" onclick="login()" value="Sign in"/>
+                    <a id="register" href="<@url value='/register'/>">Register</a>
+                </p>
             </form>
         </div>
 
@@ -86,7 +82,6 @@
 <!-- End Main Section -->
 <script type="text/javascript">
     function login() {
-        $("#errorInfo").text('');
         $("#infoErr").hide();
         if (!$("#loginForm").valid()) {
             return false;

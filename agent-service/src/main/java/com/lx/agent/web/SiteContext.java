@@ -21,6 +21,7 @@ import java.util.Map;
 public class SiteContext {
 
     private SessionContext sessionContext;
+    // secureSession must use under https
     private SecureSessionContext secureSessionContext;
     private RequestContext requestContext;
 
