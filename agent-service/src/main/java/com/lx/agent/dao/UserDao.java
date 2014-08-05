@@ -30,7 +30,8 @@ public class UserDao {
     public Integer count(String emailAddress) {
         Map<String, Object> params = new HashMap<>();
         params.put("emailAddress", emailAddress);
-        return jpaAccess.findUniqueResult("select count(id) from " + User.class.getName() + " where emailAddress = :emailAddress", params);
+        Long count = jpaAccess.findUniqueResult("select count(id) from " + User.class.getName() + " where emailAddress = :emailAddress", params);
+        return count.intValue();
     }
 
     @Inject

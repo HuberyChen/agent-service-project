@@ -43,10 +43,6 @@ public class AgentSiteController extends SiteController {
 
     }
 
-    public void login(User user) {
-        siteContext.login(user);
-    }
-
     public void signOut() {
         siteContext.signOut();
     }

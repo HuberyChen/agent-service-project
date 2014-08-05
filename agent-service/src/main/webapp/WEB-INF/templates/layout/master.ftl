@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-    <title>Quidsi, Inc. |Log Analyzing</title>
+    <title>Agent</title>
     <meta charset="utf-8"/>
 <@css href="ui.datepicker.min.css,public.css,foundation.min.css,searchportal.css" rel="stylesheet" type="text/css"/>
 <@js src="json2.js,jquery.min.js,jquery.form.js,common.js,ui.datepicker.js,jquery.validate.js"/>

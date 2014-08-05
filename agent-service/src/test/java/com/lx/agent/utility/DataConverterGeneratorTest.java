@@ -1,7 +1,5 @@
 package com.lx.agent.utility;
 
-import com.lx.agent.view.UserView;
-import com.lx.agent.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,7 +14,7 @@ public class DataConverterGeneratorTest {
 
     @Test
     public void test() {
-        new Generator().fromDomainClass(User.class).toViewClass(UserView.class).generate();
+//        new Generator().fromDomainClass(User.class).toViewClass(UserView.class).generate();
     }
 
     class Generator {

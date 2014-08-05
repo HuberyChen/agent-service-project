@@ -2,6 +2,8 @@ package com.lx.agent.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,6 +18,9 @@ public class User {
     @Id
     @Column(name = "Id")
     private int id;
+
+    @Column(name = "UserName")
+    private String userName;
 
     @Column(name = "FirstName")
     private String firstName;
@@ -38,11 +43,20 @@ public class User {
     @Column(name = "ZipCode")
     private String zipCode;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "Permission")
-    private Permission permission;
+    private Permission permission = Permission.Customer;
 
     public enum Permission {
         Customer, Admin
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getId() {
