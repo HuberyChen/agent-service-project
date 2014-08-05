@@ -1,12 +1,8 @@
 <head>
     <title>Agent</title>
     <meta charset="utf-8"/>
-<@css href="ui.datepicker.min.css,public.css,foundation.min.css,searchportal.css" rel="stylesheet" type="text/css"/>
-<@js src="jquery.min.js,jquery.form.js,common.js,ui.datepicker.js,jquery.validate.js"/>
-<@js src="foundation/foundation.js"/>
-<@js src="foundation/foundation.reveal.js"/>
-<@js src="foundation/foundation.topbar.js"/>
-<@js src="foundation/foundation.forms.js"/>
+<@css href="public.css,foundation.min.css" rel="stylesheet" type="text/css"/>
+<@js src="jquery.min.js,jquery.form.js,common.js,jquery.validate.js"/>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#registerForm").validate({
@@ -84,7 +80,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">Confirm:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="password" id="confirmPassword" placeholder="Confirm Password"/>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"/>
                     </div>
                 </div>
             </div>
