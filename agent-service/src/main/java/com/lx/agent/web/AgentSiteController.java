@@ -2,6 +2,7 @@ package com.lx.agent.web;
 
 import com.core.platform.web.site.SiteController;
 import com.core.platform.web.site.cookie.RequireCookie;
+import com.core.platform.web.site.scheme.HTTPSOnly;
 import com.core.platform.web.site.session.RequireSession;
 import com.lx.agent.domain.User;
 import com.lx.agent.exception.PermissionForbiddenException;
@@ -18,7 +19,7 @@ import java.util.Map;
 /**
  * @author hubery.chen
  */
-//@HTTPSOnly
+@HTTPSOnly
 @RequireCookie
 @RequireSession
 public class AgentSiteController extends SiteController {

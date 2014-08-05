@@ -2,6 +2,7 @@ package com.lx.agent.web;
 
 import com.core.platform.web.rest.RESTController;
 import com.core.platform.web.site.cookie.RequireCookie;
+import com.core.platform.web.site.scheme.HTTPSOnly;
 import com.core.platform.web.site.session.RequireSession;
 import com.lx.agent.domain.User;
 
@@ -11,7 +12,7 @@ import javax.inject.Inject;
  * @author hubery.chen
  */
 
-//@HTTPSOnly
+@HTTPSOnly
 @RequireCookie
 @RequireSession
 public class AgentRestController extends RESTController {

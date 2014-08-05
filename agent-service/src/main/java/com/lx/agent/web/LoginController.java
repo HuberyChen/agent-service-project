@@ -1,5 +1,6 @@
 package com.lx.agent.web;
 
+import com.core.platform.web.site.scheme.HTTPSOnly;
 import com.lx.agent.api.LoginAPIService;
 import com.lx.agent.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * @author hubery.chen
  */
-//@HTTPSOnly
+@HTTPSOnly
 @Controller
 public class LoginController extends AgentSiteController implements LoginAPIService {
 

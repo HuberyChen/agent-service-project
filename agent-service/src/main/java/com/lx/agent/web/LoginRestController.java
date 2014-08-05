@@ -2,6 +2,7 @@ package com.lx.agent.web;
 
 import com.core.crypto.EncryptionUtils;
 import com.core.platform.web.site.cookie.RequireCookie;
+import com.core.platform.web.site.scheme.HTTPSOnly;
 import com.core.platform.web.site.session.RequireSession;
 import com.core.utils.ClasspathResource;
 import com.lx.agent.api.LoginRestAPIService;
@@ -21,6 +22,7 @@ import java.util.Map;
 /**
  * @author hubery.chen
  */
+@HTTPSOnly
 @Controller
 @RequireCookie
 @RequireSession
