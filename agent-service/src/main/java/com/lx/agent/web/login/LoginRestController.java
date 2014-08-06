@@ -1,8 +1,7 @@
-package com.lx.agent.web;
+package com.lx.agent.web.login;
 
 import com.core.crypto.EncryptionUtils;
 import com.core.platform.web.site.cookie.RequireCookie;
-import com.core.platform.web.site.scheme.HTTPSOnly;
 import com.core.platform.web.site.session.RequireSession;
 import com.core.utils.ClasspathResource;
 import com.lx.agent.api.LoginRestAPIService;
@@ -10,6 +9,8 @@ import com.lx.agent.domain.User;
 import com.lx.agent.request.LoginRequest;
 import com.lx.agent.request.RegisterRequest;
 import com.lx.agent.service.UserService;
+import com.lx.agent.view.UserView;
+import com.lx.agent.web.AgentRestController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,6 @@ import java.util.Map;
 /**
  * @author hubery.chen
  */
-@HTTPSOnly
 @Controller
 @RequireCookie
 @RequireSession
@@ -48,7 +48,7 @@ public class LoginRestController extends AgentRestController implements LoginRes
     @ResponseBody
     public Map<String, Object> register(@Valid @RequestBody RegisterRequest request) {
         Map<String, Object> model = new HashMap<>();
-        User user = toUser(request);
+        User user = toUser(request.getUser());
         Integer count = userService.count(user.getEmailAddress());
         if (null == count || count > 0) {
             model.put("msg", "该用户已存在.");
@@ -67,16 +67,16 @@ public class LoginRestController extends AgentRestController implements LoginRes
         return model;
     }
 
-    private User toUser(RegisterRequest request) {
+    private User toUser(UserView userView) {
         User user = new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setUserName(request.getUserName());
-        user.setPassword(EncryptionUtils.encrypt(request.getPassword(), new ClasspathResource("public.key")));
-        user.setEmailAddress(request.getEmailAddress());
-        user.setPhone(request.getPhone());
-        user.setAddress(request.getAddress());
-        user.setZipCode(request.getZipCode());
+        user.setFirstName(userView.getFirstName());
+        user.setLastName(userView.getLastName());
+        user.setUserName(userView.getUserName());
+        user.setPassword(EncryptionUtils.encrypt(userView.getPassword(), new ClasspathResource("public.key")));
+        user.setEmailAddress(userView.getEmailAddress());
+        user.setPhone(userView.getPhone());
+        user.setAddress(userView.getAddress());
+        user.setZipCode(userView.getZipCode());
         return user;
     }
 

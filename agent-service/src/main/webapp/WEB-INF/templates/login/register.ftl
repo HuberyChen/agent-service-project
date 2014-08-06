@@ -6,29 +6,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#registerForm").validate({
-                rules: {
-                    confirmPassword: {
-                        required: true,
-                        equalTo: "#password"
-                    }
-                },
-                messages: {
-                    confirmPassword: {
-                        required: "<strong>Error:</strong> Confirm is a rquired field",
-                        equalTo: "<strong>Error:</strong> Please confirm password."
-                    },
-                    emailAddress: {
-                        required: "<strong>Error:</strong> Email Address is a rquired field",
-                        email: "<strong>Error:</strong> Please enter a valid email address."
-                    },
-                    password: {
-                        required: "<strong>Error:</strong> Password is a rquired field."
-                    },
-                    userName: {
-                        required: "<strong>Error:</strong> User Name is a rquired field."
-                    }
-
-                },
                 errorPlacement: function (error) {
                     error.appendTo($("#errInfo"));
                 },
@@ -37,6 +14,36 @@
                     error.remove();
                 },
                 wrapper: "li"
+            });
+            $("#confirmPassword").rules("add", {
+                required: true,
+                equalTo: "#password",
+                messages: {
+                    required: "<strong>Error:</strong> Confirm is a rquired field",
+                    equalTo: "<strong>Error:</strong> Please confirm password."
+                }
+            });
+            $("#emailAddress").rules("add", {
+                required: true,
+                email: true,
+                messages: {
+                    required: "<strong>Error:</strong> Email Address is a rquired field",
+                    email: "<strong>Error:</strong> Please enter a valid email address."
+                }
+            });
+            $("#password").rules("add", {
+                required: true,
+                messages: {
+                    required: "<strong>Error:</strong> Password is a rquired field",
+                    email: "<strong>Error:</strong> Please enter a valid password."
+                }
+            });
+            $("#userName").rules("add", {
+                required: true,
+                messages: {
+                    required: "<strong>Error:</strong> User Name is a rquired field",
+                    email: "<strong>Error:</strong> Please enter a valid user name."
+                }
             });
         });
     </script>
@@ -66,7 +73,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">*Email Address:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" class="required email" id="emailAddress" name="emailAddress" placeholder="Email Address"/>
+                        <input type="text" id="emailAddress" name="user.emailAddress" placeholder="Email Address"/>
                     </div>
                 </div>
             </div>
@@ -74,7 +81,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">*User Name:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" class="required" id="userName" name="userName" placeholder="User Name"/>
+                        <input type="text" id="userName" name="user.userName" placeholder="User Name"/>
                     </div>
                 </div>
             </div>
@@ -82,7 +89,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">*Password:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="password" class="required" id="password" name="password" placeholder="Password"/>
+                        <input type="password" id="password" name="user.password" placeholder="Password"/>
                     </div>
                 </div>
             </div>
@@ -90,7 +97,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">Confirm:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"/>
+                        <input type="password" id="confirmPassword" name="user.confirmPassword" placeholder="Confirm Password"/>
                     </div>
                 </div>
             </div>
@@ -98,7 +105,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">First Name:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" id="firstName" name="firstName" placeholder="First Name"/>
+                        <input type="text" id="firstName" name="user.firstName" placeholder="First Name"/>
                     </div>
                 </div>
             </div>
@@ -106,7 +113,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">Last Name:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" id="lastName" name="lastName" placeholder="Last Name"/>
+                        <input type="text" id="lastName" name="user.lastName" placeholder="Last Name"/>
                     </div>
                 </div>
             </div>
@@ -114,7 +121,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">Phone:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" id="phone" name="phone" placeholder="Phone"/>
+                        <input type="text" id="phone" name="user.phone" placeholder="Phone"/>
                     </div>
                 </div>
             </div>
@@ -122,7 +129,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">Address:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" id="address" name="address" placeholder="Address"/>
+                        <input type="text" id="address" name="user.address" placeholder="Address"/>
                     </div>
                 </div>
             </div>
@@ -130,7 +137,7 @@
                 <div class="large-12 large-centered columns">
                     <div class="large-4 small-3 columns text-right"><label style="margin-top:10px;">Zip Code:</label></div>
                     <div class="large-8 small-9 columns">
-                        <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code"/>
+                        <input type="text" id="zipCode" name="user.zipCode" placeholder="Zip Code"/>
                     </div>
                 </div>
             </div>

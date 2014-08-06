@@ -9,6 +9,8 @@ import com.core.platform.DefaultAppConfig;
 import com.core.platform.PlatformScopeResolver;
 import com.core.utils.ClasspathResource;
 import com.lx.agent.service.AgentServiceLogMessageFilter;
+import com.lx.agent.service.file.FileManager;
+import com.lx.agent.service.file.LocalFileManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +20,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.util.Assert;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -73,5 +76,11 @@ public class AppConfig extends DefaultAppConfig {
     @Bean
     public JPAAccess jpaAccess() {
         return new JPAAccess();
+    }
+
+    @Bean
+    public FileManager fileManager() {
+        Assert.notNull(env.getRequiredProperty("file.upload.path"));
+        return new LocalFileManager(env.getRequiredProperty("file.upload.path"));
     }
 }
